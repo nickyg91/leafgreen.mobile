@@ -10,9 +10,8 @@ namespace LeafGreen.App.ViewModels
 
         public MainPageViewModel()
         {
-            var deviceId = Application.Current.Properties["deviceId"].ToString();
             var api = new GardenApi();
-            Gardens = new NotifyTaskCompletion<List<Garden>>(api.GetGardensByDeviceIdAsync(deviceId));
+            Gardens = new NotifyTaskCompletion<List<Garden>>(api.GetGardensByDeviceIdAsync(DeviceId));
         }
 
         public NotifyTaskCompletion<List<Garden>> Gardens { get; set; }

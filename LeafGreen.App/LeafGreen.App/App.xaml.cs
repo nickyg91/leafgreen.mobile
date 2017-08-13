@@ -9,7 +9,7 @@ namespace LeafGreen.App
         {
             InitializeComponent();
 
-            MainPage = new LeafGreen.App.Pages.MainPage();
+            MainPage = new LeafGreen.App.Pages.CarouselLandingPage();
         }
 
         protected override void OnStart()
