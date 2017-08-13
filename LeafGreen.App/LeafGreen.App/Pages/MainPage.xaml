@@ -2,9 +2,10 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewModels="clr-namespace:LeafGreen.App.ViewModels;assembly=LeafGreen.App"
-             x:Class="LeafGreen.App.MainPage"
+             x:Class="LeafGreen.App.Pages.MainPage"
              Title="Gardens">
-    <StackLayout>
+    <StackLayout VerticalOptions="Center" 
+                 HorizontalOptions="Center">
         <Label VerticalOptions="Center" 
                HorizontalOptions="Center">
             <Label.Triggers>
@@ -12,7 +13,7 @@
                              Binding="{Binding Gardens.Result.Count}" Value="0">
                     <Setter Property="IsVisible" Value="True"/>
                     <Setter Property="Text" 
-                            Value="It looks like you have no gardens! Tap to get started."/>
+                            Value="No Gardens found! Tap here to get started."/>
                 </DataTrigger>
             </Label.Triggers>
         </Label>
@@ -21,7 +22,7 @@
                 <DataTemplate>
                     <ViewCell>
                         <ViewCell.View>
-                            <StackLayout HeightRequest="20" Padding="5">
+                            <StackLayout HeightRequest="Auto" Padding="20">
                                 <Label FontSize="18" Text="{Binding GardenName}"/>
                                 <Label Text="{Binding DateAddedString}"></Label>
                             </StackLayout>

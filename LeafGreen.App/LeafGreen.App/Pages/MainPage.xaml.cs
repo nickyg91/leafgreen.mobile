@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using LeafGreen.App.ViewModels;
 using Xamarin.Forms;
 
-namespace LeafGreen.App
+namespace LeafGreen.App.Pages
 {
     public partial class MainPage : ContentPage
     {

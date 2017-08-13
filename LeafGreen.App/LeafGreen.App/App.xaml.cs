@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 using Xamarin.Forms;
 
 namespace LeafGreen.App
@@ -13,7 +9,7 @@ namespace LeafGreen.App
         {
             InitializeComponent();
 
-            MainPage = new LeafGreen.App.MainPage();
+            MainPage = new LeafGreen.App.Pages.MainPage();
         }
 
         protected override void OnStart()
@@ -26,14 +22,14 @@ namespace LeafGreen.App
             // Handle when your app starts
         }
 
-        protected override void OnSleep()
+        protected override async void OnSleep()
         {
-            // Handle when your app sleeps
+            await Current.SavePropertiesAsync();
         }
 
         protected override void OnResume()
         {
-            // Handle when your app resumes
         }
+
     }
 }
