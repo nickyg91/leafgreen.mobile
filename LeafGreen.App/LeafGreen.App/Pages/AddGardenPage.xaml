@@ -4,13 +4,19 @@
              xmlns:behaviors="clr-namespace:LeafGreen.App.Behaviors;assembly=LeafGreen.App"
              x:Class="LeafGreen.App.Pages.AddGardenPage">
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout Spacing="10">
+            <Label FontSize="20" 
+                   Text="Create a Garden!" 
+                   VerticalOptions="Center" 
+                   HorizontalOptions="Center"/>
+            <Label Text="Garden Name" />
             <Entry Placeholder="Garden Name">
                 <Entry.Behaviors>
                     <behaviors:GardenValidatorBehavior x:Name="GardenValidatorBehavior"/>
-
                 </Entry.Behaviors>
             </Entry>
+            <Entry IsEnabled="False" />
+            <Button Text="Create" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

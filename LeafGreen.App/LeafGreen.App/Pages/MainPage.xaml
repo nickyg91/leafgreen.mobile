@@ -10,21 +10,21 @@
                HorizontalOptions="Center">
             <Label.Triggers>
                 <DataTrigger TargetType="Label"
-                             Binding="{Binding Gardens.Result.Count}" Value="0">
+                             Binding="{Binding Gardens.Count}" Value="0">
                     <Setter Property="IsVisible" Value="True"/>
                     <Setter Property="Text" 
                             Value="No Gardens found! Tap here to get started."/>
                 </DataTrigger>
             </Label.Triggers>
         </Label>
-        <ListView ItemsSource="{Binding Gardens.Result}">
+        <ListView ItemsSource="{Binding Gardens}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
                         <ViewCell.View>
                             <StackLayout HeightRequest="Auto" Padding="20">
                                 <Label FontSize="18" Text="{Binding GardenName}"/>
-                                <Label Text="{Binding DateAddedString}"></Label>
+                                <!--<Label Text="{Binding DateAddedString}"></Label>-->
                             </StackLayout>
                         </ViewCell.View>
                     </ViewCell>

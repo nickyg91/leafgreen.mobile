@@ -13,7 +13,6 @@ namespace LeafGreen.App.Pages
         public MainPage()
         {
             InitializeComponent();
-            BindingContext = new MainPageViewModel();
         }
     }
 }
