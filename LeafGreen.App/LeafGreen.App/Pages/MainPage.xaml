@@ -17,7 +17,7 @@
                 </DataTrigger>
             </Label.Triggers>
         </Label>
-        <ListView ItemsSource="{Binding Gardens}">
+        <ListView ItemsSource="{x:Static viewModels:MainPageViewModel.Gardens}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>

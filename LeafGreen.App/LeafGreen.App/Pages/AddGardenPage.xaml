@@ -2,21 +2,28 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:behaviors="clr-namespace:LeafGreen.App.Behaviors;assembly=LeafGreen.App"
+             xmlns:viewModels="clr-namespace:LeafGreen.App.ViewModels;assembly=LeafGreen.App"
              x:Class="LeafGreen.App.Pages.AddGardenPage">
     <ContentPage.Content>
-        <StackLayout Spacing="10">
+        <StackLayout Spacing="10" Padding="5">
             <Label FontSize="20" 
                    Text="Create a Garden!" 
                    VerticalOptions="Center" 
                    HorizontalOptions="Center"/>
             <Label Text="Garden Name" />
-            <Entry Placeholder="Garden Name">
+            <Entry Placeholder="Garden Name" Text="{Binding GardenName, Mode=TwoWay}">
                 <Entry.Behaviors>
                     <behaviors:GardenValidatorBehavior x:Name="GardenValidatorBehavior"/>
                 </Entry.Behaviors>
             </Entry>
-            <Entry IsEnabled="False" />
-            <Button Text="Create" />
+            <Label Text="Latitude" />
+            <Entry Text="{Binding DisplayLat}" IsEnabled="False" Placeholder="Latitude" />
+            <Label Text="Longitude" />
+            <Entry Text="{Binding DisplayLong}" IsEnabled="False" Placeholder="Latitude" />
+            <Button Text="Create" Command="{Binding AddGarden}" />
         </StackLayout>
     </ContentPage.Content>
+    <ContentPage.BindingContext>
+        <viewModels:AddGardenPageViewModel />
+    </ContentPage.BindingContext>
 </ContentPage>

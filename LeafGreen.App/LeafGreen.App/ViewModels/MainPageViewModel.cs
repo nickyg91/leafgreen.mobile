@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using LeafGreen.App.Models;
@@ -10,28 +11,29 @@ namespace LeafGreen.App.ViewModels
 {
     public class MainPageViewModel : BaseViewModel
     {
-        private ObservableCollection<Garden> _gardens;
+        private static ObservableCollection<Garden> _gardens;
         private readonly GardenApi _api;
-        private bool _isLoading;
-        private readonly string _deviceId;
+        private static bool _isLoading;
+
         public MainPageViewModel()
         {
             _api = new GardenApi();
-            _deviceId = Application.Current.Properties["deviceId"].ToString();
+            IsLoading = true;
             LoadGardensAsync();
         }
 
-        public bool IsLoading
+        public static bool IsLoading
         {
             set
             {
                 _isLoading = value;
-                OnPropertyChanged("IsLoading");
+                OnGlobalPropertyChanged("IsLoading");
             }
             get => _isLoading;
         }
 
-        public ObservableCollection<Garden> Gardens
+
+        public static ObservableCollection<Garden> Gardens
         {
             set
             {
@@ -41,21 +43,22 @@ namespace LeafGreen.App.ViewModels
             get => _gardens;
         }
 
-        private Task LoadGardensAsync()
+        private void LoadGardensAsync()
         {
-            return Task.Run(async () =>
+            Task.Run(async () =>
             {
                 try
                 {
                     var collection = new ObservableCollection<Garden>();
                     
-                    var gardens = await _api.GetGardensByDeviceIdAsync(_deviceId);
+                    var gardens = await _api.GetGardensByDeviceIdAsync(DeviceId);
                     foreach (var g in gardens)
                     {
                         collection.Add(g);
                     }
                     _gardens = collection;
-                    OnPropertyChanged("Gardens");
+                    IsLoading = false;
+                    OnGlobalPropertyChanged("Gardens");
                 }
                 catch (Exception ex)
                 {
