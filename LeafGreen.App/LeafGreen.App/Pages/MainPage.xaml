@@ -4,35 +4,35 @@
              xmlns:viewModels="clr-namespace:LeafGreen.App.ViewModels;assembly=LeafGreen.App"
              x:Class="LeafGreen.App.Pages.MainPage"
              Title="Gardens">
+    <ContentPage.BindingContext>
+        <viewModels:MainPageViewModel />
+    </ContentPage.BindingContext>
     <StackLayout VerticalOptions="Center" 
                  HorizontalOptions="Center">
         <Label VerticalOptions="Center" 
                HorizontalOptions="Center">
             <Label.Triggers>
                 <DataTrigger TargetType="Label"
-                             Binding="{Binding Gardens.Count}" Value="0">
+                             Binding="{Binding HasGardens}" Value="false">
                     <Setter Property="IsVisible" Value="True"/>
                     <Setter Property="Text" 
-                            Value="No Gardens found! Tap here to get started."/>
+                            Value="No Gardens found! Swipe left to get started."/>
                 </DataTrigger>
             </Label.Triggers>
         </Label>
-        <ListView ItemsSource="{x:Static viewModels:MainPageViewModel.Gardens}">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <ViewCell.View>
-                            <StackLayout HeightRequest="Auto" Padding="20">
-                                <Label FontSize="18" Text="{Binding GardenName}"/>
-                                <!--<Label Text="{Binding DateAddedString}"></Label>-->
-                            </StackLayout>
-                        </ViewCell.View>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
     </StackLayout>
-    <ContentPage.BindingContext>
-        <viewModels:MainPageViewModel />
-    </ContentPage.BindingContext>
+    <ListView ItemsSource="{Binding Gardens}">
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <ViewCell.View>
+                        <StackLayout Padding="5,0,0,5">
+                            <Label FontSize="18" Text="{Binding GardenName}"/>
+                            <Label FontSize="10" Text="{Binding DateAddedString}"/>
+                        </StackLayout>
+                    </ViewCell.View>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
 </ContentPage>

@@ -13,32 +13,41 @@ namespace LeafGreen.App.ViewModels
     {
         private static ObservableCollection<Garden> _gardens;
         private readonly GardenApi _api;
-        private static bool _isLoading;
+        private bool _isLoading;
+        private bool _hasGardens;
 
         public MainPageViewModel()
         {
             _api = new GardenApi();
-            IsLoading = true;
             LoadGardensAsync();
+            MessagingCenter.Subscribe<AddGardenPageViewModel, Garden>(this, "AddedGarden", (sender, arg) =>
+            {
+                Gardens.Add(arg);
+            });
         }
 
-        public static bool IsLoading
+        public bool IsLoading
         {
             set
             {
                 _isLoading = value;
-                OnGlobalPropertyChanged("IsLoading");
+                OnPropertyChanged("IsLoading");
             }
             get => _isLoading;
         }
 
+        public bool HasGardens
+        {
+            set { _hasGardens = value; OnPropertyChanged("HasGardens"); }
+            get => _hasGardens;
+        }
 
-        public static ObservableCollection<Garden> Gardens
+        public ObservableCollection<Garden> Gardens
         {
             set
             {
                 _gardens = value;
-                IsLoading = false;
+                OnPropertyChanged("Gardens");
             }
             get => _gardens;
         }
@@ -50,15 +59,14 @@ namespace LeafGreen.App.ViewModels
                 try
                 {
                     var collection = new ObservableCollection<Garden>();
-                    
+
                     var gardens = await _api.GetGardensByDeviceIdAsync(DeviceId);
                     foreach (var g in gardens)
                     {
                         collection.Add(g);
                     }
-                    _gardens = collection;
-                    IsLoading = false;
-                    OnGlobalPropertyChanged("Gardens");
+                    Gardens = collection;
+                    HasGardens = Gardens.Count > 0;
                 }
                 catch (Exception ex)
                 {

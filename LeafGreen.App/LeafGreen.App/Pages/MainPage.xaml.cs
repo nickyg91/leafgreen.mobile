@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using LeafGreen.App.ViewModels;
 using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
 namespace LeafGreen.App.Pages
 {

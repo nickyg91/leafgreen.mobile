@@ -87,10 +87,7 @@ namespace LeafGreen.App.ViewModels
                     try
                     {
                         var status = await _api.AddGardenAsync(garden);
-                        if (garden.GardenId > 0)
-                        {
-                            MainPageViewModel.Gardens.Add(garden);
-                        }
+                        MessagingCenter.Send(this, "AddedGarden", status);
                         return status;
                     }
                     catch (Exception ex)

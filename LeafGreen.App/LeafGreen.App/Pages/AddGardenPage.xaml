@@ -11,7 +11,7 @@
                    VerticalOptions="Center" 
                    HorizontalOptions="Center"/>
             <Label Text="Garden Name" />
-            <Entry Placeholder="Garden Name" Text="{Binding GardenName, Mode=TwoWay}">
+            <Entry x:Name="NameTextBox" Placeholder="Garden Name" Text="{Binding GardenName, Mode=TwoWay}">
                 <Entry.Behaviors>
                     <behaviors:GardenValidatorBehavior x:Name="GardenValidatorBehavior"/>
                 </Entry.Behaviors>
