@@ -25,12 +25,23 @@ namespace LeafGreen.App.Services
 
         public async Task<List<Garden>> GetGardensByDeviceIdAsync(string deviceId)
         {
-            using (var httpClient = new HttpClient())
+            try
             {
-                httpClient.BaseAddress = new Uri("http://leafgreen-dev.azurewebsites.net");
-                var response = await httpClient.GetAsync(new Uri($"/api/garden/{deviceId}/gardens")).ConfigureAwait(false);
-                return response.IsSuccessStatusCode ?
-                    JsonConvert.DeserializeObject<List<Garden>>(await response.Content.ReadAsStringAsync().ConfigureAwait(false)).ToList() : new List<Garden>();
+                using (var httpClient = new HttpClient())
+                {
+                    httpClient.BaseAddress = new Uri("http://leafgreen-dev.azurewebsites.net");
+                    var response = await httpClient.GetAsync(new Uri($"/api/garden/{deviceId}/gardens"))
+                        .ConfigureAwait(false);
+                    return response.IsSuccessStatusCode
+                        ? JsonConvert
+                            .DeserializeObject<List<Garden>>(await response.Content.ReadAsStringAsync()
+                                .ConfigureAwait(false)).ToList()
+                        : new List<Garden>();
+                }
+            }
+            catch (Exception ex)
+            {
+                return new List<Garden>();
             }
         }
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using LeafGreen.App.Pages;
 using Xamarin.Forms;
 
 namespace LeafGreen.App
@@ -7,18 +8,17 @@ namespace LeafGreen.App
     {
         public App()
         {
-            InitializeComponent();
-
-            MainPage = new LeafGreen.App.Pages.MainPage();
-        }
-
-        protected override void OnStart()
-        {
             var deviceId = Guid.NewGuid().ToString("N");
             if (!Current.Properties.ContainsKey("deviceId"))
             {
                 Current.Properties.Add("deviceId", deviceId);
             }
+            InitializeComponent();
+            MainPage = new CarouselLandingPage();
+        }
+
+        protected override void OnStart()
+        {
             // Handle when your app starts
         }
 
