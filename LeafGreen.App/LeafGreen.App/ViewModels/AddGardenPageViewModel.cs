@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,6 +20,10 @@ namespace LeafGreen.App.ViewModels
         private readonly IGeolocator _locator;
         private readonly GardenApi _api;
         private string _gardenName;
+        private int _plantId;
+        private string _plantName;
+        private Plant _plantToAdd;
+
         public AddGardenPageViewModel()
         {
             _api = new GardenApi();
@@ -46,6 +51,25 @@ namespace LeafGreen.App.ViewModels
         {
             get => _gardenName;
             set { _gardenName = value; OnPropertyChanged("GardenName"); }
+        }
+
+        public Plant Plant
+        {
+            set { _plantToAdd = value; OnPropertyChanged("GardenName"); }
+            get => _plantToAdd;
+        }
+
+        public ObservableCollection<Plant> Plants { get; set; }
+
+        private ICommand AddPlant
+        {
+            get
+            {
+                return new Command(obj => Task.Run(() =>
+                {
+                    Plants.Add(Plant);
+                }));
+            }
         }
 
         private void LoadLatLongAsync()
@@ -87,6 +111,18 @@ namespace LeafGreen.App.ViewModels
                     try
                     {
                         var status = await _api.AddGardenAsync(garden);
+                        if(status.GardenId > 0 && Plants.Count > 0)
+                        {
+                            var insertedPlants = Plants.Select(delegate(Plant plant, int i)
+                            {
+                                var insertedPlant = _api.InsertGardenPlant(plant, status.GardenId);
+                                return insertedPlant;
+                            });
+                            if (insertedPlants.Count() < Plants.Count)
+                            {
+                                MessagingCenter.Send(this, "PlantsAdded", false);
+                            }
+                        }
                         MessagingCenter.Send(this, "AddedGarden", status);
                         return status;
                     }

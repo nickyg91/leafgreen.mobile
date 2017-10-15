@@ -55,5 +55,17 @@ namespace LeafGreen.App.Services
                     JsonConvert.DeserializeObject<Garden>(await response.Content.ReadAsStringAsync()) : new Garden();
             }
         }
+
+        public async Task<Plant> InsertGardenPlant(Plant plant, int gardenId)
+        {
+            using (var httpClient = new HttpClient())
+            {
+                httpClient.BaseAddress = new Uri("http://leafgreen-dev.azurewebsites.net");
+                var json = JsonConvert.SerializeObject(plant);
+                var response = await httpClient.PostAsync(new Uri($"/api/plants/garden/{gardenId}/add"),
+                    new StringContent(json));
+                return JsonConvert.DeserializeObject<Plant>(await response.Content.ReadAsStringAsync());
+            }
+        }
     }
 }

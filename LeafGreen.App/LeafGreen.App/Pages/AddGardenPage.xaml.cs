@@ -21,6 +21,10 @@ namespace LeafGreen.App.Pages
                 DisplayAlert("Success!", "Your garden was added successfully!", "Close");
                 NameTextBox.Text = string.Empty;
             });
+            //MessagingCenter.Subscribe(this, "ShowAddPlantModal", (sender, args) =>
+            //{
+                
+            //});
         }
     }
 }

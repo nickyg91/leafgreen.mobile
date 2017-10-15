@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:behaviors="clr-namespace:LeafGreen.App.Behaviors;assembly=LeafGreen.App"
              xmlns:viewModels="clr-namespace:LeafGreen.App.ViewModels;assembly=LeafGreen.App"
-             x:Class="LeafGreen.App.Pages.AddGardenPage">
+             x:Class="LeafGreen.App.Pages.AddGardenPage"
+             Title="Add a Garden">
     <ContentPage.Content>
         <StackLayout Spacing="10" Padding="5">
             <Label FontSize="20" 
@@ -20,6 +21,20 @@
             <Entry Text="{Binding DisplayLat}" IsEnabled="False" Placeholder="Latitude" />
             <Label Text="Longitude" />
             <Entry Text="{Binding DisplayLong}" IsEnabled="False" Placeholder="Latitude" />
+            <ListView x:Name="PlantsToAddListView" ItemsSource="{Binding Plants}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ViewCell.View>
+                                <StackLayout Padding="5,0,0,5">
+                                    <Label FontSize="10" Text="{Binding PlantName}"/>
+                                    <Button Text="Remove"/>
+                                </StackLayout>
+                            </ViewCell.View>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
             <Button Text="Create" Command="{Binding AddGarden}" />
         </StackLayout>
     </ContentPage.Content>

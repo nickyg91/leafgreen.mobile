@@ -11,5 +11,6 @@ namespace LeafGreen.App.Services
         Task<Garden> AddGardenAsync(Garden garden);
         Task<List<Garden>> GetGardensByDeviceIdAsync(string deviceId);
         Task<Garden> GetGardenByIdAsync(int garden);
+        Task<Plant> InsertGardenPlant(Plant plant, int gardenId);
     }
 }

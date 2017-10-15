@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" android:installLocation="auto">
 	<uses-sdk android:minSdkVersion="15" />
-	<application android:label="LeafGreen"></application>
+	<application android:label="LeafGreen" 
+               android:theme="@android:style/Theme.Material"></application>
 </manifest>
