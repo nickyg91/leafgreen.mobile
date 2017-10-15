@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,15 +21,25 @@ namespace LeafGreen.App.ViewModels
         private readonly IGeolocator _locator;
         private readonly GardenApi _api;
         private string _gardenName;
-        private int _plantId;
-        private string _plantName;
-        private Plant _plantToAdd;
+        private ObservableCollection<Plant> _plants;
 
         public AddGardenPageViewModel()
         {
             _api = new GardenApi();
             _locator = CrossGeolocator.Current;
             LoadLatLongAsync();
+            _plants = new ObservableCollection<Plant>();
+            MessagingCenter.Subscribe<AddPlantModalPageViewModel, Plant>(this, "AddPlant", (sender, args) =>
+            {
+                try
+                {
+                    _plants.Add(args);
+                }
+                catch (Exception ex)
+                {
+                   Debug.WriteLine(ex.Message);
+                }
+            });
         }
         
         public double Latitude
@@ -53,24 +64,16 @@ namespace LeafGreen.App.ViewModels
             set { _gardenName = value; OnPropertyChanged("GardenName"); }
         }
 
-        public Plant Plant
+        public ObservableCollection<Plant> Plants
         {
-            set { _plantToAdd = value; OnPropertyChanged("GardenName"); }
-            get => _plantToAdd;
-        }
-
-        public ObservableCollection<Plant> Plants { get; set; }
-
-        private ICommand AddPlant
-        {
-            get
+            get => _plants;
+            set
             {
-                return new Command(obj => Task.Run(() =>
-                {
-                    Plants.Add(Plant);
-                }));
+                _plants = value;
+                OnPropertyChanged("Plants");
             }
         }
+
 
         private void LoadLatLongAsync()
         {
@@ -92,6 +95,17 @@ namespace LeafGreen.App.ViewModels
                     }
                 }
             });
+        }
+
+        public ICommand AddPlantModal
+        {
+            get
+            {
+                return new Command(obj => 
+                {
+                    MessagingCenter.Send(this, "ShowAddPlantModal");
+                });
+            }
         }
 
         public ICommand AddGarden

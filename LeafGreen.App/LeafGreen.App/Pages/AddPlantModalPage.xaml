@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:LeafGreen.App.ViewModels;assembly=LeafGreen.App"
+             x:Class="LeafGreen.App.Pages.AddPlantModalPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Plant Name"/>
+            <Entry Text="{Binding PlantName}" />
+            <Label Text="Scientific Name"/>
+            <Entry Text="{Binding PlantScientificName}" />
+            <Button Text="Add Plant" Command="{Binding AddPlant}"/>
+            <Button Text="Finish" Command="{Binding RemoveModal}"></Button>
+        </StackLayout>
+    </ContentPage.Content>
+    <ContentPage.BindingContext>
+        <viewModels:AddPlantModalPageViewModel />
+    </ContentPage.BindingContext>
+</ContentPage>

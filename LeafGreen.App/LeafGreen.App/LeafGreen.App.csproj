@@ -42,6 +42,9 @@
     <Compile Include="Pages\AddGardenPage.xaml.cs">
       <DependentUpon>AddGardenPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\AddPlantModalPage.xaml.cs">
+      <DependentUpon>AddPlantModalPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\CarouselLandingPage.xaml.cs">
       <DependentUpon>CarouselLandingPage.xaml</DependentUpon>
     </Compile>
@@ -54,6 +57,7 @@
     <Compile Include="Services\GardenApi.cs" />
     <Compile Include="Services\IGardenApi.cs" />
     <Compile Include="ViewModels\AddGardenPageViewModel.cs" />
+    <Compile Include="ViewModels\AddPlantModalPageViewModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
     <Compile Include="ViewModels\NotifyTaskCompletion.cs" />
@@ -100,7 +104,12 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\AddPlantModalPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Pages\AddGardenPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>

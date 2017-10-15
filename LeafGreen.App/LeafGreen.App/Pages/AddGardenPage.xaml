@@ -21,6 +21,7 @@
             <Entry Text="{Binding DisplayLat}" IsEnabled="False" Placeholder="Latitude" />
             <Label Text="Longitude" />
             <Entry Text="{Binding DisplayLong}" IsEnabled="False" Placeholder="Latitude" />
+            <Button Text="Add Plant" Command="{Binding AddPlantModal}"></Button>
             <ListView x:Name="PlantsToAddListView" ItemsSource="{Binding Plants}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
@@ -28,7 +29,7 @@
                             <ViewCell.View>
                                 <StackLayout Padding="5,0,0,5">
                                     <Label FontSize="10" Text="{Binding PlantName}"/>
-                                    <Button Text="Remove"/>
+                                    <Button Text="X"/>
                                 </StackLayout>
                             </ViewCell.View>
                         </ViewCell>
